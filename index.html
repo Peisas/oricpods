@@ -6,7 +6,8 @@
 <title>ORIC PODS</title>
 <style>
 body{font-family:Arial,sans-serif;background:#050505;color:#fff;margin:0}
-header{text-align:center;padding:20px;border-bottom:2px solid #b8ff4d}
+header{text-align:center;padding:25px;border-bottom:2px solid #b8ff4d;background:linear-gradient(180deg,#000,#111)}
+.logo{width:150px;height:150px;object-fit:cover;border-radius:50%;border:3px solid #b8ff4d;box-shadow:0 0 25px #b8ff4d;margin-bottom:15px}
 h1{color:#b8ff4d}
 .banner,.card,.admin-box{background:#111;border:1px solid #b8ff4d;border-radius:16px}
 .banner{margin:20px;padding:20px}
@@ -25,6 +26,7 @@ input,select{width:100%;padding:10px;margin:8px 0;border-radius:8px}
 <body>
 
 <header>
+<img src="logo.png" class="logo" alt="ORIC PODS">
 <h1>ORIC PODS</h1>
 <p>PIX • DINHEIRO • CARTÃO</p>
 </header>
@@ -79,9 +81,7 @@ let produtos=JSON.parse(localStorage.getItem('oricpods'))||[
 {nome:'NIKIBAR 30K',preco:'R$150',sabores:'Sakura Grape, Green Apple'}
 ];
 let produtoSelecionado=null;
-
 function salvar(){localStorage.setItem('oricpods',JSON.stringify(produtos));render();}
-
 function render(){
 let h='';
 produtos.forEach((p,i)=>{
@@ -92,20 +92,15 @@ let a='';
 produtos.forEach((p,i)=>a+=`<p>${p.nome} <button onclick="remover(${i})">Excluir</button></p>`);
 document.getElementById('listaAdmin').innerHTML=a;
 }
-
 function loginSocio(){
 const u=prompt('Usuário');
 const s=prompt('Senha');
-if(u==='caiorb' && s==='oricpods2k26') document.getElementById('admin').style.display='block';
+if(u==='caiorb'&&s==='oricpods2k26') document.getElementById('admin').style.display='block';
 else alert('Acesso negado');
 }
 function fecharAdmin(){document.getElementById('admin').style.display='none';}
-function addProduto(){
-produtos.push({nome:nome.value,preco:preco.value,sabores:sabores.value});
-salvar();
-}
+function addProduto(){produtos.push({nome:nome.value,preco:preco.value,sabores:sabores.value});salvar();}
 function remover(i){produtos.splice(i,1);salvar();}
-
 function abrirPedido(i){
 produtoSelecionado=produtos[i];
 const sel=document.getElementById('clienteSabor');
@@ -115,8 +110,8 @@ document.getElementById('pedidoModal').style.display='block';
 }
 function fecharPedido(){document.getElementById('pedidoModal').style.display='none';}
 function enviarPedido(){
-const msg=`🛒 NOVO PEDIDO%0A👤 Nome: ${clienteNome.value}%0A📍 Endereço: ${clienteEndereco.value}%0A💨 Produto: ${produtoSelecionado.nome}%0A🍓 Sabor: ${clienteSabor.value}%0A💳 Pagamento: ${clientePagamento.value}`;
-window.open('https://wa.me/558488823702?text='+msg,'_blank');
+const msg=`🛒 NOVO PEDIDO\n👤 Nome: ${clienteNome.value}\n📍 Endereço: ${clienteEndereco.value}\n💨 Produto: ${produtoSelecionado.nome}\n🍓 Sabor: ${clienteSabor.value}\n💳 Pagamento: ${clientePagamento.value}`;
+window.open('https://wa.me/558488823702?text='+encodeURIComponent(msg),'_blank');
 }
 render();
 </script>
