@@ -1,119 +1,240 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORIC PODS</title>
-<style>
-body{font-family:Arial,sans-serif;background:#050505;color:#fff;margin:0}
-header{text-align:center;padding:25px;border-bottom:2px solid #b8ff4d;background:linear-gradient(180deg,#000,#111)}
-.logo{width:150px;height:150px;object-fit:cover;border-radius:50%;border:3px solid #b8ff4d;box-shadow:0 0 25px #b8ff4d;margin-bottom:15px}
-h1{color:#b8ff4d}
-.banner,.card,.admin-box{background:#111;border:1px solid #b8ff4d;border-radius:16px}
-.banner{margin:20px;padding:20px}
-.catalogo{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:15px;padding:20px}
-.card{padding:15px}
-button{padding:10px;border:none;border-radius:8px;cursor:pointer}
-.btn{background:#b8ff4d}
-.top{text-align:center;margin:15px}
-input,select{width:100%;padding:10px;margin:8px 0;border-radius:8px}
-.admin{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);overflow:auto}
-.admin-box{max-width:600px;margin:20px auto;padding:20px}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9)}
-.modal-box{max-width:500px;margin:40px auto;background:#111;padding:20px;border-radius:16px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORIC PODS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            margin: 0;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 2px solid #b8ff4d;
+            background: linear-gradient(180deg, #000, #111);
+        }
+        .logo {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #b8ff4d;
+            box-shadow: 0 0 25px #b8ff4d;
+        }
+        .hero-section {
+            text-align: center;
+            padding: 100px 20px;
+        }
+        .hero-title {
+            font-size: 48px;
+            line-height: 1.2;
+            color: #b8ff4d;
+        }
+        .highlight {
+            color: #b8ff4d;
+            text-shadow: 0 0 10px #b8ff4d;
+        }
+        .hero-text {
+            margin: 20px 0;
+            font-size: 18px;
+            color: #ddd;
+        }
+        .btn {
+            padding: 12px 25px;
+            border: 2px solid #b8ff4d;
+            border-radius: 25px;
+            background: transparent;
+            color: #b8ff4d;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        .btn:hover {
+            background: #b8ff4d;
+            color: #000;
+        }
+        .banner, .card, .admin-box {
+            background: #111;
+            border: 1px solid #b8ff4d;
+            border-radius: 16px;
+            margin: 20px;
+            padding: 20px;
+        }
+        .catalogo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 15px;
+            padding: 20px;
+        }
+        .top {
+            text-align: center;
+            margin: 15px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 8px;
+        }
+        .admin {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .9);
+            overflow: auto;
+        }
+        .admin-box {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .9);
+        }
+        .modal-box {
+            max-width: 500px;
+            margin: 40px auto;
+            background: #111;
+            padding: 20px;
+            border-radius: 16px;
+        }
+    </style>
 </head>
 <body>
 
 <header>
-<img src="logo.png" class="logo" alt="ORIC PODS">
-<h1>ORIC PODS</h1>
-<p>PIX • DINHEIRO • CARTÃO</p>
+    <img src="logo.png" class="logo" alt="ORIC PODS">
+    <h1>ORIC PODS</h1>
+    <p>PIX • DINHEIRO • CARTÃO</p>
 </header>
 
 <div class="top">
-<button class="btn" onclick="loginSocio()">🔐 Sou Sócio</button>
+    <button class="btn" onclick="loginSocio()">🔐 Sou Sócio</button>
 </div>
 
+<section class="hero-section">
+    <h1 class="hero-title">Sabor que <span class="highlight">redefine.</span></h1>
+    <p class="hero-text">Pods premium desenvolvidos para quem valoriza design minimalista e experiências sensoriais autênticas.</p>
+    <a href="#catalogo" class="btn">Ver Produtos</a>
+</section>
+
 <section class="banner">
-<h2>Grande variedade você encontra aqui</h2>
-<p>Os melhores pods, sabores e lançamentos. Faça seu pedido de forma rápida pelo WhatsApp.</p>
+    <h2>Grande variedade você encontra aqui</h2>
+    <p>Os melhores pods, sabores e lançamentos. Faça seu pedido de forma rápida pelo WhatsApp.</p>
 </section>
 
 <section id="catalogo" class="catalogo"></section>
 
 <div id="admin" class="admin">
-<div class="admin-box">
-<h2>Painel Administrativo</h2>
-<input id="nome" placeholder="Produto">
-<input id="preco" placeholder="Preço">
-<input id="sabores" placeholder="Sabores separados por vírgula">
-<button class="btn" onclick="addProduto()">Adicionar</button>
-<div id="listaAdmin"></div>
-<br>
-<button onclick="fecharAdmin()">Fechar</button>
-</div>
+    <div class="admin-box">
+        <h2>Painel Administrativo</h2>
+        <input id="nome" placeholder="Produto">
+        <input id="preco" placeholder="Preço">
+        <input id="sabores" placeholder="Sabores separados por vírgula">
+        <button class="btn" onclick="addProduto()">Adicionar</button>
+        <div id="listaAdmin"></div>
+        <br>
+        <button onclick="fecharAdmin()">Fechar</button>
+    </div>
 </div>
 
 <div id="pedidoModal" class="modal">
-<div class="modal-box">
-<h2>Finalizar Pedido</h2>
-<input id="clienteNome" placeholder="Nome">
-<input id="clienteEndereco" placeholder="Endereço">
-<select id="clientePagamento">
-<option>PIX</option>
-<option>Dinheiro</option>
-<option>Cartão</option>
-</select>
-<select id="clienteSabor"></select>
-<button class="btn" onclick="enviarPedido()">Enviar Pedido</button>
-<button onclick="fecharPedido()">Cancelar</button>
-</div>
+    <div class="modal-box">
+        <h2>Finalizar Pedido</h2>
+        <input id="clienteNome" placeholder="Nome">
+        <input id="clienteEndereco" placeholder="Endereço">
+        <select id="clientePagamento">
+            <option>PIX</option>
+            <option>Dinheiro</option>
+            <option>Cartão</option>
+        </select>
+        <select id="clienteSabor"></select>
+        <button class="btn" onclick="enviarPedido()">Enviar Pedido</button>
+        <button onclick="fecharPedido()">Cancelar</button>
+    </div>
 </div>
 
 <script>
-let produtos=JSON.parse(localStorage.getItem('oricpods'))||[
-{nome:'IGNITE V150',preco:'R$130',sabores:'Green Apple Peach Kiwi, Limão Ice'},
-{nome:'IGNITE V155 Ultra Slim',preco:'R$140',sabores:'Banana Ice'},
-{nome:'ELFBAR 10K',preco:'R$120',sabores:'Green Apple Ice, Miami Mint'},
-{nome:'ELFBAR Ice King 40K',preco:'R$170',sabores:'Baja Splash, Grape Ice'},
-{nome:'WAKA 70K',preco:'R$200',sabores:'Morango Kiwi, Fresh Mint'},
-{nome:'NIKIBAR 30K',preco:'R$150',sabores:'Sakura Grape, Green Apple'}
-];
-let produtoSelecionado=null;
-function salvar(){localStorage.setItem('oricpods',JSON.stringify(produtos));render();}
-function render(){
-let h='';
-produtos.forEach((p,i)=>{
-h+=`<div class="card"><h3>${p.nome}</h3><p><b>${p.preco}</b></p><p>${p.sabores}</p><button class="btn" onclick="abrirPedido(${i})">Comprar</button></div>`;
-});
-document.getElementById('catalogo').innerHTML=h;
-let a='';
-produtos.forEach((p,i)=>a+=`<p>${p.nome} <button onclick="remover(${i})">Excluir</button></p>`);
-document.getElementById('listaAdmin').innerHTML=a;
-}
-function loginSocio(){
-const u=prompt('Usuário');
-const s=prompt('Senha');
-if(u==='caiorb'&&s==='oricpods2k26') document.getElementById('admin').style.display='block';
-else alert('Acesso negado');
-}
-function fecharAdmin(){document.getElementById('admin').style.display='none';}
-function addProduto(){produtos.push({nome:nome.value,preco:preco.value,sabores:sabores.value});salvar();}
-function remover(i){produtos.splice(i,1);salvar();}
-function abrirPedido(i){
-produtoSelecionado=produtos[i];
-const sel=document.getElementById('clienteSabor');
-sel.innerHTML='';
-produtoSelecionado.sabores.split(',').forEach(s=>sel.innerHTML+=`<option>${s.trim()}</option>`);
-document.getElementById('pedidoModal').style.display='block';
-}
-function fecharPedido(){document.getElementById('pedidoModal').style.display='none';}
-function enviarPedido(){
-const msg=`🛒 NOVO PEDIDO\n👤 Nome: ${clienteNome.value}\n📍 Endereço: ${clienteEndereco.value}\n💨 Produto: ${produtoSelecionado.nome}\n🍓 Sabor: ${clienteSabor.value}\n💳 Pagamento: ${clientePagamento.value}`;
-window.open('https://wa.me/558488823702?text='+encodeURIComponent(msg),'_blank');
-}
-render();
+    let produtos = JSON.parse(localStorage.getItem('oricpods')) || [
+        { nome: 'IGNITE V150', preco: 'R$130', sabores: 'Green Apple Peach Kiwi, Limão Ice' },
+        { nome: 'IGNITE V155 Ultra Slim', preco: 'R$140', sabores: 'Banana Ice' },
+        { nome: 'ELFBAR 10K', preco: 'R$120', sabores: 'Green Apple Ice, Miami Mint' },
+        { nome: 'ELFBAR Ice King 40K', preco: 'R$170', sabores: 'Baja Splash, Grape Ice' },
+        { nome: 'WAKA 70K', preco: 'R$200', sabores: 'Morango Kiwi, Fresh Mint' },
+        { nome: 'NIKIBAR 30K', preco: 'R$150', sabores: 'Sakura Grape, Green Apple' }
+    ];
+    let produtoSelecionado = null;
+
+    function salvar() {
+        localStorage.setItem('oricpods', JSON.stringify(produtos));
+        render();
+    }
+
+    function render() {
+        let h = '';
+        produtos.forEach((p, i) => {
+            h += `<div class="card"><h3>${p.nome}</h3><p><b>${p.preco}</b></p><p>${p.sabores}</p><button class="btn" onclick="abrirPedido(${i})">Comprar</button></div>`;
+        });
+        document.getElementById('catalogo').innerHTML = h;
+        let a = '';
+        produtos.forEach((p, i) => a += `<p>${p.nome} <button onclick="remover(${i})">Excluir</button></p>`);
+        document.getElementById('listaAdmin').innerHTML = a;
+    }
+
+    function loginSocio() {
+        const u = prompt('Usuário');
+        const s = prompt('Senha');
+        if (u === 'caiorb' && s === 'oricpods2k26') document.getElementById('admin').style.display = 'block';
+        else alert('Acesso negado');
+    }
+
+    function fecharAdmin() {
+        document.getElementById('admin').style.display = 'none';
+    }
+
+    function addProduto() {
+        produtos.push({ nome: document.getElementById('nome').value, preco: document.getElementById('preco').value, sabores: document.getElementById('sabores').value });
+        salvar();
+        document.getElementById('nome').value = '';
+        document.getElementById('preco').value = '';
+        document.getElementById('sabores').value = '';
+    }
+
+    function remover(i) {
+        produtos.splice(i, 1);
+        salvar();
+    }
+
+    function abrirPedido(i) {
+        produtoSelecionado = produtos[i];
+        const sel = document.getElementById('clienteSabor');
+        sel.innerHTML = '';
+        produtoSelecionado.sabores.split(',').forEach(s => sel.innerHTML += `<option>${s.trim()}</option>`);
+        document.getElementById('pedidoModal').style.display = 'block';
+    }
+
+    function fecharPedido() {
+        document.getElementById('pedidoModal').style.display = 'none';
+    }
+
+    function enviarPedido() {
+        const msg = `🛒 NOVO PEDIDO\n👤 Nome: ${document.getElementById('clienteNome').value}\n📍 Endereço: ${document.getElementById('clienteEndereco').value}\n💨 Produto: ${produtoSelecionado.nome}\n🍓 Sabor: ${document.getElementById('clienteSabor').value}\n💳 Pagamento: ${document.getElementById('clientePagamento').value}`;
+        window.open('https://wa.me/558488823702?text=' + encodeURIComponent(msg), '_blank');
+    }
+
+    render();
 </script>
+
 </body>
 </html>
